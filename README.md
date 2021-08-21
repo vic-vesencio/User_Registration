@@ -1,2 +1,2 @@
-# User_Registration
-Electives 2 activity 2
+# CRUD_MERN
+Elective project CRUD_MERN

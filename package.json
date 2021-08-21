@@ -1,0 +1,32 @@
+{
+  "name": "crud_mern",
+  "version": "1.0.0",
+  "description": "elective proj",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "test": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vic-vesencio/CRUD_MERN.git"
+  },
+  "author": "vic vesencio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vic-vesencio/CRUD_MERN/issues"
+  },
+  "homepage": "https://github.com/vic-vesencio/CRUD_MERN#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
