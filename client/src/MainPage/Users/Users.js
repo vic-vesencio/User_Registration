@@ -6,7 +6,6 @@ import axiosDefault from '../../config/axiosConfig';
 import Appbar from '../../MainComponents/Appbar';
 
 //Material UI
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Table from '@material-ui/core/Table';
@@ -16,38 +15,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { IconButton, Tooltip, Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 
-//icons
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+//Users components
+import CreateUser from './CreateUser'; 
 
-const useStyles = makeStyles((theme) => ({
-   modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-   },
-   paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-   },
-}));
- 
+//context
+import UserContext from '../../Context/UserContext';
 
 const Users = (props) => {
    const [users, setUsers] = useState(null);
-   const classes = useStyles();
-   const [open, setOpen] = useState(false);
-   const [openEdit, setOpenEdit] = useState(false);
 
    useEffect(()=>{
       if(users === null){
@@ -63,7 +39,7 @@ const Users = (props) => {
    });
 
    return (
-      <div>
+      <UserContext.Provider value={{users, setUsers}}>
          <Appbar centerTitle={'Users'} />
          <CssBaseline />
          <Container color="primary" maxWidth="md">
@@ -73,7 +49,7 @@ const Users = (props) => {
                   <TableRow>
                      <TableCell component="th">Username</TableCell>
                      <TableCell align="right">
-                        Add user
+                        <CreateUser />
                      </TableCell>
                   </TableRow>
                </TableHead>
@@ -99,7 +75,7 @@ const Users = (props) => {
                </Table>
             </TableContainer>
          </Container>
-      </div>
+      </UserContext.Provider>
    );
 }
 
