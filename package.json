@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/vic-vesencio/CRUD_MERN#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",

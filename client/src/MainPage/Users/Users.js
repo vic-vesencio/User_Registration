@@ -43,19 +43,18 @@ const useStyles = makeStyles((theme) => ({
 }));
  
 
-const Todos = (props) => {
+const Users = (props) => {
    const [users, setUsers] = useState(null);
    const classes = useStyles();
    const [open, setOpen] = useState(false);
    const [openEdit, setOpenEdit] = useState(false);
-   const [selectedID, selectID] = useState(null);
 
    useEffect(()=>{
-      if(todos === null){
-         axios.get(axiosDefault.apiURL+'/api/todos/get-all/', {crossdomain: true})
+      if(users === null){
+         axios.get(axiosDefault.apiURL+'/api/users/get-all/', {crossdomain: true})
          .then(function (res) {
             console.log(res)
-            setTodos(res.data)
+            setUsers(res.data);
          })
          .catch(function (err) {
             console.log(err)
@@ -65,7 +64,7 @@ const Todos = (props) => {
 
    return (
       <div>
-         <Appbar centerTitle={'Todos'} />
+         <Appbar centerTitle={'Users'} />
          <CssBaseline />
          <Container color="primary" maxWidth="md">
             <TableContainer theme='primary' component={Paper} style={{marginTop: '1rem'}}>
@@ -74,17 +73,7 @@ const Todos = (props) => {
                   <TableRow>
                      <TableCell component="th">Username</TableCell>
                      <TableCell align="right">
-                        <Tooltip title='create new user'>
-                           <span>
-                           <IconButton color="secondary" component="span"
-                              onClick={()=>{
-                                 setOpen(true)
-                              }}
-                           >
-                              <AddCircleOutlineIcon />
-                           </IconButton>
-                           </span>
-                        </Tooltip>
+                        Add user
                      </TableCell>
                   </TableRow>
                </TableHead>
@@ -96,30 +85,13 @@ const Todos = (props) => {
                               {user.username}
                            </TableCell>
                            <TableCell align="right">
-                              <Tooltip title='edit user'>
-                                 <IconButton color="secondary" component="span"
-                                    onClick={()=>setOpenEdit(true)}
-                                 >
-                                    <EditIcon />
-                                 </IconButton>
-                              </Tooltip>
-                              <Tooltip title='edit todo'>
-                                 <IconButton color="secondary" component="span"
-                                    onClick={()=>{
-                                       selectID(user._id);
-                                       setOpen
-                                    }}
-                                 >
-                                    <EditIcon />
-                                 </IconButton>
-                              </Tooltip>
                            </TableCell>
                         </TableRow>
                      ))
                      :
                      <TableRow>
                         <TableCell component="th" scope="row">
-                           no todos yet
+                           no users yet
                         </TableCell>
                      </TableRow>
                   }
@@ -127,32 +99,8 @@ const Todos = (props) => {
                </Table>
             </TableContainer>
          </Container>
-         <Modal
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-               timeout: 500,
-            }}
-         >
-            <Fade in={open}>
-               <div className={classes.paper}>
-                  <p>Enter new description</p>
-                  <TextField
-                     style={{width: '100%'}}
-                     label="edit description"
-                     margin="dense"
-                     variant="outlined"
-                  />
-                  <Button color='secondary'>save</Button>
-                  <Button onClick={()=>handleClose()} color='secondary'>close</Button>
-               </div>
-            </Fade>
-         </Modal>
       </div>
    );
 }
 
-export default Todos;
+export default Users;

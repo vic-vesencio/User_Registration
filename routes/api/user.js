@@ -7,7 +7,7 @@ const User = require('../../models/User');
 
 //@route GET users
 //@desc Get All users
-router.get('/', (req, res) => {
+router.get('/get-all', (req, res) => {
 	User.find()
 		.sort({ date: 1})
         .then(users => res.json(users));
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 //@route POST user
 //@desc create new user
-router.post('/', async(req, res) => {
+router.post('/create', async(req, res) => {
 	const newUser = new User({
 		username: req.body.username,
 		password: req.body.password,
@@ -54,7 +54,7 @@ router.post('/', async(req, res) => {
 
 //@route DELETE user:id
 //@desc delete user
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
 	User.findById(req.params.id)
 		.then(users => users.remove().then(() => res.json( {success: true, msg: 'user deleted' })))
 		.catch(err => res.status(404).json({ success: false, msg: 'user not deleted', err }));

@@ -5,6 +5,7 @@ const cors = require('cors')
 
 //Declare routes
 const todos = require('./routes/api/todos');
+const users = require('./routes/api/user');
 
 const app = express();
 
@@ -31,6 +32,7 @@ mongoose
 
 //use routes
 app.use('/api/todos', todos);
+app.use('/api/users', users);
 
 // Specify the Port where the backend server can be accessed and start listening on that port
 const port = process.env.PORT || 5000;
