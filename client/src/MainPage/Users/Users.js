@@ -48,6 +48,10 @@ const Users = (props) => {
                <TableHead>
                   <TableRow>
                      <TableCell component="th">Username</TableCell>
+                     <TableCell component="th">first name</TableCell>
+                     <TableCell component="th">last name</TableCell>
+                     <TableCell component="th">middle name</TableCell>
+                     <TableCell component="th">email</TableCell>
                      <TableCell align="right">
                         <CreateUser />
                      </TableCell>
@@ -59,6 +63,18 @@ const Users = (props) => {
                         <TableRow key={user._id}>
                            <TableCell component="th" scope="row">
                               {user.username}
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              {user.firstName}
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              {user.lastName}
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              {user.middleName}
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              {user.email}
                            </TableCell>
                            <TableCell align="right">
                            </TableCell>
