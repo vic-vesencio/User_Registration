@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import axiosDefault from '../config/axiosConfig';
+import axiosDefault from '../../config/axiosConfig';
 
 //Components
-import Appbar from '../MainComponents/Appbar';
+import Appbar from '../../MainComponents/Appbar';
 
 //Material UI
 import Typography from '@material-ui/core/Typography';
@@ -44,20 +44,11 @@ const useStyles = makeStyles((theme) => ({
  
 
 const Todos = (props) => {
-   const [todos, setTodos] = useState(null);
-   const [desc, setDesc] = useState('');
+   const [users, setUsers] = useState(null);
    const classes = useStyles();
-   const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = useState(false);
+   const [openEdit, setOpenEdit] = useState(false);
    const [selectedID, selectID] = useState(null);
-   const [newDesc, setNewDesc] = useState('');
- 
-   const handleOpen = () => {
-     setOpen(true);
-   };
- 
-   const handleClose = () => {
-     setOpen(false);
-   };
 
    useEffect(()=>{
       if(todos === null){
@@ -77,39 +68,17 @@ const Todos = (props) => {
          <Appbar centerTitle={'Todos'} />
          <CssBaseline />
          <Container color="primary" maxWidth="md">
-            <Typography variant="h6">
-               Todos
-            </Typography>
-
-            <TableContainer theme='primary' component={Paper}>
+            <TableContainer theme='primary' component={Paper} style={{marginTop: '1rem'}}>
                <Table aria-label="simple table">
                <TableHead>
                   <TableRow>
-                     <TableCell component="th">Description</TableCell>
+                     <TableCell component="th">Username</TableCell>
                      <TableCell align="right">
-                        <TextField
-                           value={desc}
-                           onChange={e=>setDesc(e.target.value)}
-                           label="Add todo"
-                           margin="dense"
-                           variant="outlined"
-                        />
-                        <Tooltip title='add todo'>
+                        <Tooltip title='create new user'>
                            <span>
-                           <IconButton disabled={desc === '' ? true : false} color="secondary" component="span"
+                           <IconButton color="secondary" component="span"
                               onClick={()=>{
-                                 let reqbody = {
-                                    description: desc
-                                 }
-                                 axios.post(axiosDefault.apiURL+'/api/todos/add', reqbody, {crossdomain: true})
-                                 .then(function (res) {
-                                    console.log(res)
-                                    setDesc('');
-                                    setTodos(null)
-                                 })
-                                 .catch(function (err) {
-                                    console.log(err)
-                                 }) 
+                                 setOpen(true)
                               }}
                            >
                               <AddCircleOutlineIcon />
@@ -120,34 +89,25 @@ const Todos = (props) => {
                   </TableRow>
                </TableHead>
                <TableBody>
-                  {todos !== null ?
-                     todos.map((todo) => (
-                        <TableRow key={todo._id}>
+                  {users !== null ?
+                     users.map((user) => (
+                        <TableRow key={user._id}>
                            <TableCell component="th" scope="row">
-                              {todo.description}
+                              {user.username}
                            </TableCell>
                            <TableCell align="right">
-                              <Tooltip title='delete todo'>
+                              <Tooltip title='edit user'>
                                  <IconButton color="secondary" component="span"
-                                    onClick={()=>{
-                                       axios.delete(axiosDefault.apiURL+'/api/todos/delete/'+todo._id, {crossdomain: true})
-                                       .then(function (res) {
-                                          console.log(res)
-                                          setTodos(null)
-                                       })
-                                       .catch(function (err) {
-                                          console.log(err)
-                                       }) 
-                                    }}
+                                    onClick={()=>setOpenEdit(true)}
                                  >
-                                    <DeleteIcon />
+                                    <EditIcon />
                                  </IconButton>
                               </Tooltip>
                               <Tooltip title='edit todo'>
                                  <IconButton color="secondary" component="span"
                                     onClick={()=>{
-                                       selectID(todo._id);
-                                       handleOpen();
+                                       selectID(user._id);
+                                       setOpen
                                     }}
                                  >
                                     <EditIcon />
@@ -168,8 +128,6 @@ const Todos = (props) => {
             </TableContainer>
          </Container>
          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
             className={classes.modal}
             open={open}
             onClose={handleClose}
@@ -184,28 +142,11 @@ const Todos = (props) => {
                   <p>Enter new description</p>
                   <TextField
                      style={{width: '100%'}}
-                     value={newDesc}
-                     onChange={e=>setNewDesc(e.target.value)}
                      label="edit description"
                      margin="dense"
                      variant="outlined"
                   />
-                  <Button color='secondary'
-                     onClick={()=>{
-                        let reqbody ={
-                           description: newDesc
-                        }
-                        axios.put(axiosDefault.apiURL+'/api/todos/update/'+selectedID, reqbody,{crossdomain: true})
-                        .then(function (res) {
-                           setTodos(null)
-                           console.log(res)
-                        })
-                        .catch(function (err) {
-                           console.log(err)
-                        }) 
-                        handleClose();
-                     }}
-                  >save</Button>
+                  <Button color='secondary'>save</Button>
                   <Button onClick={()=>handleClose()} color='secondary'>close</Button>
                </div>
             </Fade>

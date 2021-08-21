@@ -19,6 +19,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import MenuIcon from '@material-ui/icons/Menu';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme) => ({
    userMenu: {
@@ -68,7 +69,7 @@ export default React.memo(({centerTitle}) => {
                   </IconButton>
                </Box>
                <Typography className={classes.scribe} variant="h6">
-                  MERN | CRUD
+                  MERN | Electives
                </Typography>
                <Typography className={classes.title} variant="h6">
                   {centerTitle}
@@ -92,9 +93,15 @@ export default React.memo(({centerTitle}) => {
                         </ListItem>
                      </List>
                      <List className={classes.list}>
-                        <ListItem button onClick={()=>history.push("/")}>
+                        <ListItem button onClick={()=>history.push("/todos")}>
                            <ListItemIcon><DashboardIcon /> </ListItemIcon>
                            <ListItemText primary={'Todos'} />
+                        </ListItem>
+                     </List>
+                     <List className={classes.list}>
+                        <ListItem button onClick={()=>history.push("/")}>
+                           <ListItemIcon><GroupIcon /> </ListItemIcon>
+                           <ListItemText primary={'Users'} />
                         </ListItem>
                      </List>
                   </div>

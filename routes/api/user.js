@@ -62,7 +62,7 @@ router.delete('/:id', (req, res) => {
 
 //@route UPDATE user.password:id
 //@update user password
-router.post('/update/change-password', (req, res) => {
+router.post('/change-password/', (req, res) => {
 	const {username} = req.body;
 	User.findOne({ username })
 	.then(users =>{
