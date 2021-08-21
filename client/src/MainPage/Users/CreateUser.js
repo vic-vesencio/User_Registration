@@ -1,4 +1,6 @@
 import React, {useContext, useState} from 'react';
+import axios from 'axios';
+import axiosDefault from '../../config/axiosConfig';
 
 import { 
    IconButton, 
@@ -61,9 +63,17 @@ const CreateUser = () => {
 
    const createUser = (e) =>{
       e.preventDefault();
-      if(username !== '' && password !== '' && firstName !== '' && lastName !== '' && middleName !== '' && email !== ''){
-         alert('okay');
+      let newUser = {
+         username, password, firstName, lastName, middleName, email
       }
+      axios.post(axiosDefault.apiURL+'/api/users/create/', newUser, {crossdomain: true})
+      .then(function (res) {
+         console.log(res)
+         newUserContext.setUsers(null);
+      })
+      .catch(function (err) {
+         console.log(err)
+      }) 
    }
  
    return (
