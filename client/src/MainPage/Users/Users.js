@@ -15,15 +15,17 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 //Users components
 import CreateUser from './CreateUser'; 
-import DeleteUser from './DeleteUser'
+import DeleteUser from './DeleteUser';
+import EditUser from './EditUser';
 
 //context
 import UserContext from '../../Context/UserContext';
 
-const Users = (props) => {
+const Users = () => {
    const [users, setUsers] = useState(null);
 
    useEffect(()=>{
@@ -78,7 +80,21 @@ const Users = (props) => {
                               {user.email}
                            </TableCell>
                            <TableCell align="right">
-                              <DeleteUser props={{username: user.username, id: user._id}} />
+                              <Grid container>
+                                 <Grid xs={6}>
+                                    <EditUser 
+                                    props={{
+                                       username: user.username, firstName: user.firstName, id: user._id,
+                                       lastName: user.lastName, middleName: user.middleName, email: user.email
+                                    }} 
+                                    /> 
+                                 </Grid>
+                                 <Grid xs={6}>
+                                    <DeleteUser 
+                                       props={{username: user.username, id: user._id, }}
+                                    />
+                                 </Grid>
+                              </Grid>
                            </TableCell>
                         </TableRow>
                      ))
