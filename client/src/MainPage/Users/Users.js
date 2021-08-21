@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 
 //Users components
 import CreateUser from './CreateUser'; 
+import DeleteUser from './DeleteUser'
 
 //context
 import UserContext from '../../Context/UserContext';
@@ -77,6 +78,7 @@ const Users = (props) => {
                               {user.email}
                            </TableCell>
                            <TableCell align="right">
+                              <DeleteUser props={{username: user.username, id: user._id}} />
                            </TableCell>
                         </TableRow>
                      ))

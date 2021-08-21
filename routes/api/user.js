@@ -57,7 +57,7 @@ router.post('/create', async(req, res) => {
 router.delete('/delete/:id', (req, res) => {
 	User.findById(req.params.id)
 		.then(users => users.remove().then(() => res.json( {success: true, msg: 'user deleted' })))
-		.catch(err => res.status(404).json({ success: false, msg: 'user not deleted', err }));
+		.catch(err => res.status(200).json({ success: false, msg: 'user not deleted', err }));
 });
 
 //@route UPDATE user.password:id
